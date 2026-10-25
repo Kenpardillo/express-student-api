@@ -25,5 +25,8 @@ mongoose.connect(process.env.MONGO_URI)
         console.error('MongoDB connection error:', err);
     });
 
+// Authentication routes
+app.use('/api/auth', require('./routes/auth'));
+
 // Student routes
 app.use('/students', studentRoutes);
