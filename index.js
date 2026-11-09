@@ -1,13 +1,17 @@
 require('dotenv').config();
 
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const studentRoutes = require('./routes/students');
+const authRoutes = require('./routes/auth');
+const uploadRoutes = require('./routes/upload');
 
 const app = express();
 
 // Allows Express to read JSON request bodies
 app.use(express.json());
+app.use(cors({ origin: 'http://localhost:5174' }));
 
 // Connect to MongoDB Atlas
 mongoose.connect(process.env.MONGO_URI)
@@ -26,7 +30,8 @@ mongoose.connect(process.env.MONGO_URI)
     });
 
 // Authentication routes
-app.use('/api/auth', require('./routes/auth'));
+app.use('/api/auth', authRoutes);
 
 // Student routes
 app.use('/students', studentRoutes);
+app.use('/api/upload', uploadRoutes);

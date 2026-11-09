@@ -1,0 +1,3 @@
+Why Use memoryStorage Instead of diskStorage?
+
+We use Multer's memoryStorage because it temporarily stores uploaded files in the computer's memory as a buffer instead of saving them to the server's disk. This allows our backend to send the image directly to Cloudinary using upload_stream. It also avoids creating temporary files and reduces the need for disk cleanup. After uploading, Cloudinary stores the image and returns a secure URL and public ID.
